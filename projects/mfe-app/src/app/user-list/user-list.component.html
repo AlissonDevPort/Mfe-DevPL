@@ -1,0 +1,73 @@
+<!-- src/app/user/user-list/user-list.component.html -->
+<div class="main-content">
+  <h2>Lista de Parceiros</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let partner of partners
+            | paginate : { itemsPerPage: 5, currentPage: p }
+        "
+      >
+        <td>{{ partner.id }}</td>
+        <td>{{ partner.name }}</td>
+        <td>{{ partner.description }}</td>
+        <td class="actions">
+          <button (click)="editPartner(partner)">Editar</button>
+          <button (click)="deletePartner(partner.id)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  <h3 *ngIf="editingPartner">Editar Parceiro</h3>
+  <h3 *ngIf="!editingPartner">Cadastrar Novo Parceiro</h3>
+
+  <form (ngSubmit)="editingPartner ? updatePartner() : createPartner()">
+    <label>
+      Nome:
+      <input
+        *ngIf="editingPartner"
+        [(ngModel)]="editingPartner.name"
+        name="name"
+        required
+      />
+      <input
+        *ngIf="!editingPartner"
+        [(ngModel)]="newPartner.name"
+        name="name"
+        required
+      />
+    </label>
+    <label>
+      Descrição:
+      <input
+        *ngIf="editingPartner"
+        [(ngModel)]="editingPartner.description"
+        name="description"
+        required
+      />
+      <input
+        *ngIf="!editingPartner"
+        [(ngModel)]="newPartner.description"
+        name="description"
+        required
+      />
+    </label>
+    <button type="submit">
+      {{ editingPartner ? "Atualizar" : "Cadastrar" }}
+    </button>
+    <button type="button" (click)="resetForm()">Cancelar</button>
+  </form>
+</div>

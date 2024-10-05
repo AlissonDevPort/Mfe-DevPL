@@ -1,0 +1,73 @@
+<!-- src/app/user/user-list/user-list.component.html -->
+<div class="main-content">
+  <h2>Lista de Empresas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Nome da empresa</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let company of companys
+            | paginate : { itemsPerPage: 5, currentPage: p }
+        "
+      >
+        <td>{{ company.id }}</td>
+        <td>{{ company.name }}</td>
+        <td>{{ company.companyName }}</td>
+        <td class="actions">
+          <button (click)="editCompany(company)">Editar</button>
+          <button (click)="deleteCompany(company.id)">Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  <h3 *ngIf="editingCompany">Editar Empresa</h3>
+  <h3 *ngIf="!editingCompany">Cadastrar Nova Empresa</h3>
+
+  <form (ngSubmit)="editingCompany ? updateCompany() : createCompany()">
+    <label>
+      Nome:
+      <input
+        *ngIf="editingCompany"
+        [(ngModel)]="editingCompany.name"
+        name="name"
+        required
+      />
+      <input
+        *ngIf="!editingCompany"
+        [(ngModel)]="newCompany.name"
+        name="name"
+        required
+      />
+    </label>
+    <label>
+      Nome da empresa:
+      <input
+        *ngIf="editingCompany"
+        [(ngModel)]="editingCompany.companyName"
+        name="companyName"
+        required
+      />
+      <input
+        *ngIf="!editingCompany"
+        [(ngModel)]="newCompany.companyName"
+        name="companyName"
+        required
+      />
+    </label>
+    <button type="submit">
+      {{ editingCompany ? "Atualizar" : "Cadastrar" }}
+    </button>
+    <button type="button" (click)="resetForm()">Cancelar</button>
+  </form>
+</div>
