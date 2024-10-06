@@ -1,7 +1,17 @@
 <div class="main-content">
-  <div class="table-holder">
-    <h2>Lista de Empresas MF2</h2>
+  <h2>Lista de Empresas MF2</h2>
 
+  <div class="btn-holder">
+    <input
+      type="text"
+      id="searchId"
+      [(ngModel)]="searchId"
+      placeholder="Buscar empresa por ID"
+    />
+    <button (click)="searchCompany()">Buscar</button>
+  </div>
+
+  <div class="table-holder">
     <table>
       <thead>
         <tr>
@@ -29,9 +39,7 @@
       </tbody>
     </table>
 
-    <pagination-controls
-      (pageChange)="updatePage($event)"
-    ></pagination-controls>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 
   <h3 *ngIf="editingCompany">Editar Empresa</h3>

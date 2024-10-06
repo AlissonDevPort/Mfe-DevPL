@@ -19,7 +19,11 @@ table {
   min-width: 600px;
   border-collapse: collapse;
 }
+.btn-holder{
+  display: flex;
+  gap: 10px;
 
+}
 th,
 td {
   padding: 10px;

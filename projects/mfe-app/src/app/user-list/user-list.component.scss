@@ -19,7 +19,14 @@ table {
   min-width: 600px;
   border-collapse: collapse;
 }
+h2{
+  text-align: center;
+}
+.btn-holder{
+  display: flex;
+  gap: 10px;
 
+}
 th,
 td {
   padding: 10px;

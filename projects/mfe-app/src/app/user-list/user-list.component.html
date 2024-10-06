@@ -1,13 +1,20 @@
 <div class="main-content">
+  <h2>Lista de Parceiros MFE1</h2>
+  <div class="btn-holder">
+    <input
+      type="text"
+      [(ngModel)]="searchId"
+      placeholder="Buscar parceiro por ID"
+    />
+    <button (click)="searchPartner()">Buscar</button>
+  </div>
   <div class="table-holder">
-    <h2>Lista de Parceiros MFE1</h2>
-
     <table>
       <thead>
         <tr>
           <th>ID</th>
           <th>Nome</th>
-          <th>descrição</th>
+          <th>Descrição</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -29,47 +36,46 @@
       </tbody>
     </table>
 
-  
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
-  <h3 *ngIf="editingPartner">Editar Parceiro</h3>
-<h3 *ngIf="!editingPartner">Cadastrar Novo Parceiro</h3>
 
-<form (ngSubmit)="editingPartner ? updatePartner() : createPartner()">
-  <label>
-    Nome:
-    <input
-      *ngIf="editingPartner"
-      [(ngModel)]="editingPartner.name"
-      name="name"
-      required
-    />
-    <input
-      *ngIf="!editingPartner"
-      [(ngModel)]="newPartner.name"
-      name="name"
-      required
-    />
-  </label>
-  <label>
-    Descrição:
-    <input
-      *ngIf="editingPartner"
-      [(ngModel)]="editingPartner.description"
-      name="description"
-      required
-    />
-    <input
-      *ngIf="!editingPartner"
-      [(ngModel)]="newPartner.description"
-      name="description"
-      required
-    />
-  </label>
-  <button type="submit">
-    {{ editingPartner ? "Atualizar" : "Cadastrar" }}
-  </button>
-  <button type="button" (click)="resetForm()">Cancelar</button>
-</form>
+  <h3 *ngIf="editingPartner">Editar Parceiro</h3>
+  <h3 *ngIf="!editingPartner">Cadastrar Novo Parceiro</h3>
+
+  <form (ngSubmit)="editingPartner ? updatePartner() : createPartner()">
+    <label>
+      Nome:
+      <input
+        *ngIf="editingPartner"
+        [(ngModel)]="editingPartner.name"
+        name="name"
+        required
+      />
+      <input
+        *ngIf="!editingPartner"
+        [(ngModel)]="newPartner.name"
+        name="name"
+        required
+      />
+    </label>
+    <label>
+      Descrição:
+      <input
+        *ngIf="editingPartner"
+        [(ngModel)]="editingPartner.description"
+        name="description"
+        required
+      />
+      <input
+        *ngIf="!editingPartner"
+        [(ngModel)]="newPartner.description"
+        name="description"
+        required
+      />
+    </label>
+    <button type="submit">
+      {{ editingPartner ? "Atualizar" : "Cadastrar" }}
+    </button>
+    <button type="button" (click)="resetForm()">Cancelar</button>
+  </form>
 </div>

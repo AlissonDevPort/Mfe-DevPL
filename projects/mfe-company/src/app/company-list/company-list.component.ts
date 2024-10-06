@@ -12,6 +12,7 @@ export class CompanyListComponent implements OnInit {
   newCompany: any = { name: '', companyName: '' };
   editingCompany: any = null;
   p: number = 1;
+  searchId: string = '';
 
   constructor(
     private companyService: CompanyService,
@@ -39,12 +40,14 @@ export class CompanyListComponent implements OnInit {
   createCompany(): void {
     this.companyService.createCompany(this.newCompany).subscribe(() => {
       this.loadCompanys();
-      this.newCompany = { name: '', email: '' };
+      this.newCompany = { name: '', companyName: '' };
     });
   }
+
   resetForm(): void {
-    this.newCompany = { name: '', email: '' };
+    this.newCompany = { name: '', companyName: '' };
     this.editingCompany = null;
+    this.searchId = '';
   }
 
   editCompany(company: any): void {
@@ -68,9 +71,19 @@ export class CompanyListComponent implements OnInit {
     });
   }
 
-  updatePage(page: number): void {
-    this.p = page;
-   // this.router.navigate(['company-list'], { queryParams: { page: this.p } });
+  searchCompany(): void {
+    if (this.searchId) {
+      this.companyService.getCompanyById(this.searchId).subscribe(
+        (data) => {
+          this.companys = [data];
+        },
+        (error) => {
+          console.error('Empresa não encontrada', error);
+          this.companys = [];
+        }
+      );
+    } else {
+      this.loadCompanys();
+    }
   }
 }
-
