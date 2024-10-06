@@ -44,11 +44,11 @@ Para rodar os MFEs, aplique os seguintes comandos:
 
   no bash bash
   
-  ng s mfe-app --port 4300
+  ng s mfe-app --port 4300 Para mfe Table partner
 
-  ng s mfe-company --port 4400
+  ng s mfe-company --port 4400 Para mfe Table companys
 
-  ng s mfe-login --port 4500
+  ng s mfe-login --port 4500 Para mfe Login 
 
-  ng s mfe-host
+  ng s mfe-host Para mfe HOST
   
