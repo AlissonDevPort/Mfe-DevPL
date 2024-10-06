@@ -1,7 +1,13 @@
-<h1>This is HOST Application.</h1>
-<br />
-<a routerLink='/'>Home</a>&nbsp;&nbsp;
-<a routerLink='/user-list'>USER  List</a>
-<a routerLink='/company-list'>COMPANY List</a>
-
-<router-outlet></router-outlet>
+<nav class="navbar">
+    <ul>
+      <!-- <li><a routerLink='/'>Home</a></li> -->
+      <li><a routerLink='/user-list'>User List</a></li>
+      <li><a routerLink='/company-list'>Company List</a></li>
+      <li><a routerLink='/login'>Login</a></li>
+      <li><button (click)="logout()">Sair</button></li>
+      <li *ngIf="username" class="username">Bem-vindo, {{ username }}</li>
+    </ul>
+  </nav>
+  
+  <router-outlet></router-outlet>
+  

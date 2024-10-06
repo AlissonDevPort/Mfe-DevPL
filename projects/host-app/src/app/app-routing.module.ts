@@ -5,10 +5,12 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 
 const MFE_APP_URL = 'http://localhost:4300/remoteEntry.js';
 const MFE_COMPANY_URL = 'http://localhost:4400/remoteEntry.js';
+const MFE_LOGIN = 'http://localhost:4500/remoteEntry.js';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //{ path: 'home', component: HomeComponent },
   {
     path: 'user-list',
     loadChildren: () => {
@@ -30,6 +32,18 @@ const routes: Routes = [
         exposedModule: './CompanyListModule',
       })
         .then((m) => m.CompanyListModule)
+        .catch((err) => console.log(err));
+    },
+  },
+  {
+    path: 'login',
+    loadChildren: () => {
+      return loadRemoteModule({
+        remoteEntry: MFE_LOGIN,
+        remoteName: 'mfeLogin',
+        exposedModule: './LoginModule',
+      })
+        .then((m) => m.LoginModule)
         .catch((err) => console.log(err));
     },
   },

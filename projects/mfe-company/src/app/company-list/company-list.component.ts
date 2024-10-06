@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from './company-list.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-list',
@@ -12,9 +13,20 @@ export class CompanyListComponent implements OnInit {
   editingCompany: any = null;
   p: number = 1;
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const page = +params['page'];
+      if (page && page > 0) {
+        this.p = page;
+      }
+      return (this.p = 1);
+    });
     this.loadCompanys();
   }
 
@@ -55,4 +67,10 @@ export class CompanyListComponent implements OnInit {
       this.loadCompanys();
     });
   }
+
+  updatePage(page: number): void {
+    this.p = page;
+   // this.router.navigate(['company-list'], { queryParams: { page: this.p } });
+  }
 }
+
